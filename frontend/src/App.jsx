@@ -56,7 +56,7 @@ function RegisterPage({ onNavigate }) {
               style={{ ...styles.input, borderColor: errors.full_name ? 'red' : '#ccc' }}
               value={form.full_name}
               onChange={e => setForm({ ...form, full_name: e.target.value })}
-              placeholder="John Doe"
+              placeholder="Okan Can NAZLI"
             />
             {errors.full_name && <span style={styles.error}>{errors.full_name}</span>}
           </div>
@@ -66,7 +66,7 @@ function RegisterPage({ onNavigate }) {
               style={{ ...styles.input, borderColor: errors.email ? 'red' : '#ccc' }}
               value={form.email}
               onChange={e => setForm({ ...form, email: e.target.value })}
-              placeholder="john@example.com"
+              placeholder="okan@example.com"
             />
             {errors.email && <span style={styles.error}>{errors.email}</span>}
           </div>
