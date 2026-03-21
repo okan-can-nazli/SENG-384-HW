@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 
 const API = 'http://localhost:5000/api';
 
-function RegisterPage({ onNavigate }) {
+function RegisterPage() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({ full_name: '', email: '' });
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState(null);
@@ -68,11 +70,11 @@ function RegisterPage({ onNavigate }) {
               onChange={e => setForm({ ...form, email: e.target.value })}
               placeholder="okan@example.com"
             />
-            {errors.email && <span style={styles.error}>{errors.email}</span>}
+            {errors.email && <span style={styles.error}>{errors.error}</span>}
           </div>
           <button style={styles.btn} type="submit">Register</button>
         </form>
-        <button style={{ ...styles.btn, background: '#6c757d', marginTop: '10px' }} onClick={() => onNavigate('list')}>
+        <button style={{ ...styles.btn, background: '#6c757d', marginTop: '10px' }} onClick={() => navigate('/people')}>
           View All People →
         </button>
       </div>
@@ -80,7 +82,8 @@ function RegisterPage({ onNavigate }) {
   );
 }
 
-function PeopleListPage({ onNavigate }) {
+function PeopleListPage() {
+  const navigate = useNavigate();
   const [people, setPeople] = useState([]);
   const [editing, setEditing] = useState(null);
   const [editForm, setEditForm] = useState({ full_name: '', email: '' });
@@ -131,7 +134,7 @@ function PeopleListPage({ onNavigate }) {
             {message.text}
           </div>
         )}
-        <button style={{ ...styles.btn, background: '#6c757d', marginBottom: '20px' }} onClick={() => onNavigate('register')}>
+        <button style={{ ...styles.btn, background: '#6c757d', marginBottom: '20px' }} onClick={() => navigate('/')}>
           ← Register New Person
         </button>
         {people.length === 0 ? (
@@ -197,6 +200,12 @@ const styles = {
 };
 
 export default function App() {
-  const [page, setPage] = useState('register');
-  return page === 'register' ? <RegisterPage onNavigate={setPage} /> : <PeopleListPage onNavigate={setPage} />;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<RegisterPage />} />
+        <Route path="/people" element={<PeopleListPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
