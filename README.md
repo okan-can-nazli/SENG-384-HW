@@ -40,10 +40,11 @@ docker compose up --build
 
 ### 4. Access the app
 
-| Service  | URL                              |
-|----------|----------------------------------|
-| Frontend | http://localhost:5173            |
-| Backend  | http://localhost:5000/api/people |
+| Service  | URL                                    |
+|----------|----------------------------------------|
+| Frontend (Register) | http://localhost:5173       |
+| Frontend (People)   | http://localhost:5173/people|
+| Backend  | http://localhost:5000/api/people       |
 
 ### 5. Stop the system
 
